@@ -1,0 +1,543 @@
+/* ============================================================
+   style.css — San Sebastian College Recoletos Manila
+   Official Colors: Crimson Red (#B5121B) + Golden Yellow (#F5C518)
+   Applied across: login, dashboard (LMS), and OPAC search page
+   *** ENHANCED UI EDITION ***
+   ============================================================ */
+
+/* --- Import Modern Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* ---------- CSS Variables — SSCR Brand Palette ---------- */
+:root {
+    /* Crimson Red */
+    --red:          #B5121B;   
+    --red-d:        #8c0d14;   
+    --red-l:        #d4333b;   
+    --red-bg:       #fdf0f0;   
+    --red-border:   #f5b8bb;   
+
+    /* Golden Yellow */
+    --yellow:       #F5C518;   
+    --yellow-d:     #c9a012;   
+    --yellow-l:     #fad84a;   
+    --yellow-bg:    #fffbea;   
+    --yellow-border:#f5e08a;   
+
+    /* Neutral / UI */
+    --white:        #ffffff;
+    --bg:           #f7f2f2;   
+    --text:         #1c0a0a;   
+    --muted:        #7a6060;   
+    --border:       #e8d8d8;   
+    --success:      #1a7a45;
+    --success-bg:   #edf7f2;
+    --danger:       #8c0d14;   
+    
+    /* ENHANCED: Modern Shadows & Radii */
+    --shadow-sm:    0 2px 8px rgba(181, 18, 27, 0.04);
+    --shadow-md:    0 8px 24px rgba(181, 18, 27, 0.08);
+    --shadow-lg:    0 16px 40px rgba(0, 0, 0, 0.15);
+    --radius:       10px;
+    --radius-lg:    20px;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    /* ENHANCED: Modern UI Font */
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a { color: var(--red); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--red-d); text-decoration: underline; }
+
+/* ENHANCED: Academic Serif Font for Headings */
+h1, h2, h3, .school-name { 
+    font-family: 'Lora', Georgia, serif; 
+    color: var(--red); 
+    font-weight: 600; 
+}
+
+.text-center { text-align: center; }
+.text-muted  { color: var(--muted); font-size: 0.88rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 1rem; }
+
+/* ---------- Alert / Message Boxes ---------- */
+.alert { 
+    padding: 0.85rem 1.2rem; 
+    border-radius: var(--radius); 
+    margin-bottom: 1.2rem; 
+    font-size: 0.92rem; 
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.4s ease-out;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+.alert-error   { background: var(--red-bg);    color: var(--red-d);  border-left: 4px solid var(--red); }
+.alert-success { background: var(--success-bg); color: var(--success); border-left: 4px solid var(--success); }
+.alert-info    { background: var(--yellow-bg); color: #7a5800;       border-left: 4px solid var(--yellow); }
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 1.5rem 1rem;
+    position: relative;
+    overflow: hidden;
+
+    /* Your clear background picture */
+    background-image: url('sscrloginbackground.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* ENHANCED: Animated Background Circles */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.08; }
+    50% { transform: scale(1.05); opacity: 0.12; }
+    100% { transform: scale(1); opacity: 0.08; }
+}
+
+.login-wrapper::before {
+    content: ''; position: absolute;
+    width: 520px; height: 520px; border-radius: 50%;
+    background: rgba(245,197,24,1); top: -160px; left: -130px;
+    pointer-events: none; animation: pulse 6s infinite ease-in-out;
+}
+.login-wrapper::after {
+    content: ''; position: absolute;
+    width: 380px; height: 380px; border-radius: 50%;
+    background: rgba(245,197,24,1); bottom: -100px; right: -100px;
+    pointer-events: none; animation: pulse 8s infinite ease-in-out reverse;
+}
+
+/* Login card */
+.login-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border-top: 6px solid var(--yellow);
+    box-shadow: var(--shadow-lg);
+    padding: 2.8rem 2.5rem 2.4rem;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.login-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.5rem; 
+}
+
+.login-logo img {
+    display: block;
+    margin: 0 auto;
+    
+    /* This shrinks the logo down safely */
+    width: 90px;
+    height: 90px;
+    object-fit: contain; /* Prevents the logo from stretching or looking squished */
+}
+
+.login-card .school-name { font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+.login-card .school-location { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em;}
+
+.sscr-divider { display: flex; width: 80px; height: 4px; border-radius: 2px; margin: 0 auto 1.5rem; overflow: hidden; }
+.sscr-divider span:first-child  { flex: 1; background: var(--red); }
+.sscr-divider span:last-child   { flex: 1; background: var(--yellow); }
+
+.login-card h1 { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.login-card .welcome-text { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+
+/* ---- Form Elements ---- */
+.form-group { margin-bottom: 1.2rem; text-align: left; }
+.form-group label {
+    display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.87rem; color: var(--text);
+}
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border); border-radius: var(--radius);
+    font-size: 0.95rem; color: var(--text); background: #fafafa;
+    transition: all 0.2s ease; outline: none; font-family: inherit;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--red); background: var(--white);
+    box-shadow: 0 4px 12px rgba(181,18,27,0.1);
+    transform: translateY(-1px);
+}
+
+/* ---- Buttons ---- */
+.btn {
+    display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.4rem; border-radius: var(--radius); border: none;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+    background: var(--yellow); color: var(--text);
+    width: 100%; padding: 0.85rem; font-size: 1.05rem; font-weight: 700;
+    box-shadow: 0 4px 15px rgba(245,197,24,0.3);
+}
+.btn-primary:hover { background: var(--yellow-l); box-shadow: 0 6px 20px rgba(245,197,24,0.4); }
+
+.btn-small  { padding: 0.45rem 0.9rem; font-size: 0.85rem; }
+.btn-red    { background: var(--red); color: var(--white); }
+.btn-red:hover { background: var(--red-d); box-shadow: var(--shadow-md); }
+.btn-edit   { background: #fdf0f0; color: var(--red); border: 1px solid var(--red-border); }
+.btn-edit:hover { background: var(--red); color: var(--white); }
+.btn-delete { background: #fff0f0; color: #c53030; border: 1px solid #feb2b2; }
+.btn-delete:hover { background: #c53030; color: var(--white); }
+.btn-add    { background: var(--success); color: var(--white); }
+.btn-add:hover { background: #145e36; box-shadow: 0 4px 12px rgba(26,122,69,0.2); }
+.btn-cancel { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+.btn-cancel:hover { background: #e2e8f0; }
+.btn-yellow { background: var(--yellow); color: var(--text); font-weight: 700; }
+.btn-yellow:hover { background: var(--yellow-l); box-shadow: 0 4px 12px rgba(245,197,24,0.3); }
+
+/* Forgot password link */
+.forgot-link {
+    display: block; text-align: right; font-size: 0.85rem; color: var(--muted);
+    margin: -0.5rem 0 1.5rem 0; cursor: pointer; font-weight: 500; transition: color 0.2s;
+}
+.forgot-link:hover { color: var(--red); }
+
+.demo-box {
+    background: var(--yellow-bg); border: 1px dashed var(--yellow-border);
+    border-radius: var(--radius); padding: 1rem; text-align: left; font-size: 0.85rem;
+    margin-top: 1.5rem; color: #5a4000;
+}
+.demo-box code {
+    background: var(--white); border: 1px solid var(--yellow-border);
+    padding: 0.2rem 0.4rem; border-radius: 4px; font-weight: 600;
+}
+
+.login-footer-note {
+    color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 2rem;
+    text-align: center; position: relative; z-index: 1; letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   NAVBAR (Glassmorphism Effect)
+   ============================================================ */
+.navbar {
+    background: rgba(181, 18, 27, 0.95); /* ENHANCED: Semi-transparent red */
+    backdrop-filter: blur(10px);         /* ENHANCED: Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--white); padding: 0 2rem; display: flex; align-items: center;
+    justify-content: space-between; height: 65px; position: sticky; top: 0; z-index: 100;
+    border-bottom: 4px solid var(--yellow); box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.navbar .brand { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+.navbar .brand-yellow { color: var(--yellow); }
+.navbar .nav-right { display: flex; align-items: center; gap: 1.5rem; font-size: 0.9rem; font-weight: 500; }
+.navbar .nav-right a { color: rgba(255,255,255,0.85); transition: color 0.2s; }
+.navbar .nav-right a:hover { color: var(--yellow); text-decoration: none; }
+.navbar .nav-badge {
+    background: var(--yellow); color: var(--text); padding: 0.25rem 0.8rem;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   MAIN CONTENT WRAPPER
+   ============================================================ */
+.main-content { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+.page-header  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.page-header h2 { font-size: 1.6rem; }
+
+/* ============================================================
+   STAT CARDS (Dashboard overview)
+   ============================================================ */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+.stat-card {
+    background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem;
+    border-left: 5px solid var(--yellow);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+}
+.stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.stat-card .stat-info .stat-number { font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 0.2rem; }
+.stat-card .stat-info .stat-label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;}
+
+/* ============================================================
+   CARD / PANEL
+   ============================================================ */
+.card {
+    background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(0,0,0,0.02);
+}
+.card h3 {
+    font-size: 1.25rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem;
+    border-bottom: 3px solid var(--yellow); color: var(--red); display: inline-block;
+}
+
+/* ============================================================
+   TABLE ENHANCEMENTS
+   ============================================================ */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; background: var(--white); }
+thead th {
+    background: #fdfdfd; color: var(--muted); padding: 1rem;
+    text-align: left; font-weight: 600; white-space: nowrap;
+    text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.2s; }
+tbody tr:hover { background: #fafafa; }
+tbody tr:last-child { border-bottom: none; }
+tbody td { padding: 1rem; vertical-align: middle; color: var(--text); }
+
+/* Badges */
+.badge { display: inline-block; padding: 0.35rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em; }
+.badge-available { background: var(--success-bg); color: var(--success); }
+.badge-low       { background: var(--yellow-bg); color: #975a16; }
+.badge-none      { background: var(--red-bg);    color: var(--red); }
+.badge-borrowed  { background: #ebf8ff; color: #2b6cb0; }
+.badge-returned  { background: var(--success-bg); color: var(--success); }
+.badge-overdue   { background: var(--red-bg); color: var(--red); }
+
+/* ============================================================
+   MODALS (Glassmorphism Overlay)
+   ============================================================ */
+.modal-overlay, .forgot-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    align-items: center; justify-content: center; padding: 1rem;
+    background: rgba(45, 0, 5, 0.4); 
+    backdrop-filter: blur(4px); /* ENHANCED: Blurs the background behind modal */
+}
+.modal-overlay.active, .forgot-modal-overlay.active { display: flex; animation: fadeInOverlay 0.2s ease-out; }
+@keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+
+.modal, .forgot-modal {
+    background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+    padding: 2.5rem; width: 100%; max-width: 550px;
+    border-top: 6px solid var(--yellow);
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+.modal h3 { margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; color: var(--red); }
+.modal-footer { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.5rem; }
+.form-grid .form-group { margin-bottom: 1.2rem; }
+.form-grid .full-width { grid-column: 1 / -1; }
+
+/* ============================================================
+   OPAC HERO & BOOK CARDS (Student Search)
+   ============================================================ */
+.opac-hero {
+    background: linear-gradient(135deg, #6b0008 0%, #9e0f17 50%, #B5121B 100%);
+    color: var(--white); padding: 4rem 1.5rem; text-align: center;
+    border-bottom: 5px solid var(--yellow); position: relative;
+}
+.opac-hero h2 { font-family: 'Lora', serif; color: var(--yellow-l); font-size: 2.2rem; margin-bottom: 0.8rem; }
+.opac-hero p { opacity: 0.9; margin-bottom: 2rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+.search-bar { 
+    display: flex; gap: 0.8rem; max-width: 700px; margin: 0 auto; flex-wrap: wrap; 
+    background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: var(--radius); backdrop-filter: blur(5px);
+}
+.search-bar input, .search-bar select { border: none; font-size: 1rem; }
+.search-bar input { flex: 1; min-width: 200px; }
+.search-bar button { padding: 0.75rem 2rem; font-size: 1.05rem; }
+
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.book-card {
+    background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    padding: 1.5rem; border-top: 4px solid var(--yellow); border-left: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+    display: flex; flex-direction: column;
+}
+.book-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: rgba(181, 18, 27, 0.2); }
+.book-card .book-title  { font-family: 'Lora', serif; font-weight: 600; font-size: 1.15rem; color: var(--red); margin-bottom: 0.4rem; line-height: 1.3;}
+.book-card .book-author { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.2rem; }
+.book-card .book-meta   { font-size: 0.85rem; color: var(--text); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+.book-card .book-meta span { font-weight: 600; }
+
+.no-results { text-align: center; padding: 4rem 1rem; color: var(--muted); background: var(--white); border-radius: var(--radius); border: 1px dashed var(--border); }
+.no-results .no-results-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; opacity: 0.5;}
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+   ============================================================ */
+@media (max-width: 768px) {
+    .navbar { padding: 0 1rem; height: auto; flex-direction: column; padding-top: 1rem; padding-bottom: 1rem; gap: 1rem;}
+    .main-content { padding: 0 1rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .page-header { flex-direction: column; align-items: flex-start; }
+    thead th:nth-child(n+5) { display: none; }
+    tbody td:nth-child(n+5) { display: none; }
+    .opac-hero h2 { font-size: 1.8rem; }
+    .search-bar { background: transparent; padding: 0; }
+}
+/* ============================================================
+   DASHBOARD HEADER & TAB NAVIGATION (Missing CSS)
+   ============================================================ */
+.dashboard-header {
+    background: linear-gradient(135deg, var(--red-d) 0%, var(--red) 100%);
+    color: var(--white);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--yellow);
+    box-shadow: var(--shadow-md);
+    flex-wrap: wrap; 
+    gap: 1rem;
+}
+
+.dashboard-header h1 {
+    color: var(--white);
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+}
+
+.dashboard-header .subtitle {
+    color: var(--yellow-l);
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.hdr-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.hdr-user {
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* Tab Navigation */
+.tab-nav {
+    display: flex;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    box-shadow: var(--shadow-sm);
+    gap: 1rem;
+    overflow-x: auto; 
+}
+
+.tab-nav a {
+    padding: 1.2rem 1rem;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.tab-nav a:hover {
+    color: var(--red);
+}
+
+.tab-nav a.active {
+    color: var(--red);
+    border-bottom-color: var(--red);
+}
+
+/* Transaction Status Buttons */
+.btn-return {
+    background: #ebf8ff;
+    color: #2b6cb0;
+    border: 1px solid #bee3f8;
+    border-radius: var(--radius);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-return:hover {
+    background: #bee3f8;
+    transform: translateY(-2px);
+}
+
+.btn-returned {
+    display: inline-block;
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid #c6f6d5;
+    border-radius: var(--radius);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+/* ============================================================
+   FIXES FOR HEADER USER INFO & LOGOUT BUTTON
+   ============================================================ */
+
+/* Turns the logout button Golden Yellow so it contrasts with the red header */
+.btn-logout {
+    background-color: var(--yellow);
+    color: #1c0a0a; /* Dark text for readability */
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid var(--yellow-d);
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.btn-logout:hover {
+    background-color: var(--yellow-l);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Styles the role badge (Admin / Librarian) into a distinct pill container */
+.dashboard-header .nav-badge {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    color: var(--yellow-l);
+    border: 1px solid var(--yellow-border);
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 0.5rem;
+}
+.header-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain; /* Prevents stretching or distortion */
+    
+    /* REMOVES THE WHITE BACKGROUND WITHOUT CHANGING LOGO COLORS */
+    background-color: transparent;
+    
+    /* Clean spacing between the logo and your library title text */
+    margin-right: 0.2rem; 
+}
